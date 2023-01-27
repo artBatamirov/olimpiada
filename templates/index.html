@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bar</title>
+    <style>
+        .navbar {
+        width: 100%;
+        height: 70px;
+        box-shadow: 0 4px 10px rgba(0,138,120, 0.1);
+        }
+
+        .navbar .container {
+            height: inherit;
+            display: flex;
+            color: rgb(0, 0, 0)
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-menu  {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            display: flex;
+            flex-flow: row nowrap;
+            margin-right: 1800px
+        }
+
+        .navbar-menu li {
+            display: inline-block;
+
+        }
+
+        .navbar-menu li a {
+            display: inline-block;
+            opacity: 0.7;
+            text-decoration: none;
+            padding: 20px;
+            color: rgb(0, 0, 0);
+            font-size: 22px;
+        }
+
+        .navbar-menu li a:hover {
+            opacity: 1;
+            transition: all .07s ease-in-out;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 26px;
+            text-decoration: none;
+            color: rgb(79, 121, 66)
+        }
+
+        .navbar-brand:hover {
+            color: rgb(87,126,234);
+            transition: all .07s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-brand">CYBER GREEN</a>
+            <ul class="navbar-menu" >
+                <li><a href="#">Sensors</a></li>
+                <li><a href="#">Statistics</a></li>
+                <li><a href="#">Windows</a></li>
+                <li><a href="#">Watering</a></li>
+                <li><a href="#">Emergency</a></li>
+            </ul>
+        </div>
+    </nav>
+</body>
+</html>
