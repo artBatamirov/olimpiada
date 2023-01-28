@@ -1,0 +1,23 @@
+table {
+    border: 1px solid #4682B4;
+    margin-left: 1000px;
+    margin-top: 20px;
+}
+
+th {
+background: #B0C4DE;
+font-size: 1em;
+padding: 10px;
+}
+
+td {
+   background: #ADD8E6;
+   padding: 10px;
+}
+
+hr {
+    width: 100%;
+    color: black;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
