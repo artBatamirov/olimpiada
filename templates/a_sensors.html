@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>sensor</title>
+    <title>Air</title>
     <link href="/static/bar_style.css" rel="stylesheet">
     <link href="/static/page_style.css" rel="stylesheet">
 
@@ -14,15 +14,22 @@
         <div class="container">
             <a href="#" class="navbar-brand">Funtago</a>
             <ul class="navbar-menu" >
-                <li><a href="#">Air Sensors</a></li>
-                <li><a href="#">Soil Sensors</a></li>
+                <li><a href="">Air Sensors</a></li>
+                <li><a href="s_sensors.html">Soil Sensors</a></li>
                 <li><a href="#">Statistics</a></li>
                 <li><a href="#">Settings</a></li>
             </ul>
+            <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
+
+            <script>
+            function refreshPage(){
+                window.location.reload();
+            }
+            </script>
         </div>
     </nav>
 
-    <table>
+    <table align="center">
         <tr><th>Snr</th><th>Температура воздуха</th><th>Влажность воздуха</th></tr>
         <tr><th>№1</th><td>данные</td><td>данные</td></tr>
         <tr><th>№2</th><td>данные</td><td>данные</td></tr>
@@ -31,13 +38,25 @@
     </table>
 
     <hr>
+    <h1 align="center">Температура воздуха</h1>
     <div>
-        <canvas id="myChart"  height="40px"  align="center"></canvas>
+        <canvas id="firstChart" height="40px"></canvas>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" margin-top="1000px"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="/scripts/script.js">
+    <script src="/scripts/script1.js">
+
+    </script>
+
+    <h1 align="center">Влажность воздуха</h1>
+    <div>
+        <canvas id="secondChart" height="40px"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="/scripts/script2.js">
 
     </script>
 </body>

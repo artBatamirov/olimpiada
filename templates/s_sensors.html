@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Soil</title>
+    <link href="/static/bar_style.css" rel="stylesheet">
+    <link href="/static/page_style.css" rel="stylesheet">
+
+
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-brand">Funtago</a>
+            <ul class="navbar-menu">
+                <li><a href="a_sensors.html">Air Sensors</a></li>
+                <li><a href="">Soil Sensors</a></li>
+                <li><a href="#">Statistics</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+            <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
+
+            <script>
+            function refreshPage(){
+                window.location.reload();
+            }
+            </script>
+        </div>
+    </nav>
+
+    <table align="center">
+        <tr><th>Snr</th><th>Влажность почвы</th></tr>
+        <tr><th>№1</th><td>данные</td></tr>
+        <tr><th>№2</th><td>данные</td></tr>
+        <tr><th>№3</th><td>данные</td></tr>
+        <tr><th>№4</th><td>данные</td></tr>
+        <tr><th>№4</th><td>данные</td></tr>
+        <tr><th>№4</th><td>данные</td></tr>
+    </table>
+
+    <hr>
+    <h1 align="center">Влажность почвы</h1>
+    <div>
+        <canvas id="thirdChart" height="40px"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="/scripts/script3.js">
+
+    </script>
+
+
+</body>
+</html>

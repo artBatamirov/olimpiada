@@ -1,7 +1,7 @@
 
-const ctx = document.getElementById('myChart');
+const ctx3 = document.getElementById('secondChart').getContext("2d");
 
-  new Chart(ctx, {
+  new Chart(ctx3, {
     type: 'line',
     data: {
       labels: ['start', '0:30', '1:00', '1:30', '2:00', '2:30'],
@@ -16,7 +16,6 @@ const ctx = document.getElementById('myChart');
         label: 'Sensor 2',
         data: [17, 10, 3, 18, 2, 5],
         borderColor: 'red',
-        backgroundColor: 'red',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       },
@@ -30,7 +29,7 @@ const ctx = document.getElementById('myChart');
       {
         label: 'Sensor 4',
         data: [17, 2, 19, 8, 1, 9],
-        borderColor: 'pink',
+        borderColor: 'orange',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       }]

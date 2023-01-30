@@ -10,11 +10,19 @@
         <div class="container">
             <a href="#" class="navbar-brand">CYBER GREEN</a>
             <ul class="navbar-menu" >
-                <li><a href="sensors.html">Air Sensors</a></li>
-                <li><a href="#">Soil Sensors</a></li>
+                <li><a href="a_sensors.html">Air Sensors</a></li>
+                <li><a href="s_sensors.html">Soil Sensors</a></li>
                 <li><a href="#">Statistics</a></li>
                 <li><a href="#">Settings</a></li>
+
             </ul>
+            <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
+
+            <script>
+            function refreshPage(){
+                window.location.reload();
+            }
+            </script>
         </div>
     </nav>
 </body>
