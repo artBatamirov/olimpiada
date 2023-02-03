@@ -1,6 +1,7 @@
 table {
     border: 1px solid #4682B4;
     margin-top: 20px;
+    border-radius: 15px;
 }
 
 th {
@@ -8,6 +9,7 @@ background: #B0C4DE;
 font-size: 1em;
 font-family: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
 padding: 10px;
+border-radius: 10px;
 }
 
 td {
@@ -15,6 +17,7 @@ td {
    font-size: 1em;
    font-family: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
    padding: 10px;
+   border-radius: 10px;
 }
 
 hr {
@@ -28,3 +31,16 @@ h1 {
 font-family: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
 font-weight: 600;
 }
+
+.btn {
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    background-color: lightgrey;
+}
+
+button:active {
+    background-color: lightblue;
+
+}
+

@@ -31,11 +31,19 @@
 
     <table align="center">
         <tr><th>Snr</th><th>Температура воздуха</th><th>Влажность воздуха</th></tr>
-        <tr><th>№1</th><td>данные</td><td>данные</td></tr>
-        <tr><th>№2</th><td>данные</td><td>данные</td></tr>
-        <tr><th>№3</th><td>данные</td><td>данные</td></tr>
-        <tr><th>№4</th><td>данные</td><td>данные</td></tr>
+        <tr><th>№1</th><td>{{ da[0][0] }}</td><td>{{ da[0][1] }}</td></tr>
+        <tr><th>№2</th><td>{{ da[1][0] }}</td><td>{{ da[1][1] }}</td></tr>
+        <tr><th>№3</th><td>{{ da[2][0] }}</td><td>{{ da[2][1] }}</td></tr>
+        <tr><th>№4</th><td>{{ da[3][0] }}</td><td>{{ da[3][1] }}</td></tr>
     </table>
+    <form action>
+         <ol>
+            <li><input type="checkbox" name="wind" value="window">Форточки</li>
+            <li><input type="checkbox" name="wind" value="bluse">Увлажнение</li>
+        </ol>
+        <input type="submit">
+    </form>
+
 
     <hr>
     <h1 align="center">Температура воздуха</h1>
@@ -45,8 +53,50 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="/scripts/script1.js">
+    <script>
+    const ctx1 = document.getElementById('firstChart').getContext("2d");
 
+  new Chart(ctx1, {
+    type: 'line',
+    data: {
+      labels: ['start', '0:30', '1:00', '1:30', '2:00', '2:30'],
+      datasets: [{
+        label: 'Sensor 1',
+        data: {{ do[0] }},
+        borderColor: 'green',
+        cubicInterpolationMode: 'monotone',
+        borderWidth: 3,
+      },
+      {
+        label: 'Sensor 2',
+        data: [17, 10, 3, 18, 2, 5],
+        borderColor: 'red',
+        cubicInterpolationMode: 'monotone',
+        borderWidth: 3,
+      },
+      {
+        label: 'Sensor 3',
+        data: [8, 11, 3, 5, 7, 12],
+        cubicInterpolationMode: 'monotone',
+        borderColor: 'blue',
+        borderWidth: 3,
+      },
+      {
+        label: 'Sensor 4',
+        data: [17, 2, 19, 8, 1, 9],
+        borderColor: 'orange',
+        cubicInterpolationMode: 'monotone',
+        borderWidth: 3,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
     </script>
 
     <h1 align="center">Влажность воздуха</h1>
@@ -56,8 +106,50 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="/scripts/script2.js">
+    <script>
+    const ctx3 = document.getElementById('secondChart').getContext("2d");
 
+  new Chart(ctx3, {
+    type: 'line',
+    data: {
+      labels: ['start', '0:30', '1:00', '1:30', '2:00', '2:30'],
+      datasets: [{
+        label: 'Sensor 1',
+        data: [12, 19, 3, 5, 2, 21],
+        borderColor: 'green',
+        cubicInterpolationMode: 'monotone',
+        borderWidth: 3,
+      },
+      {
+        label: 'Sensor 2',
+        data: [17, 10, 3, 18, 2, 5],
+        borderColor: 'red',
+        cubicInterpolationMode: 'monotone',
+        borderWidth: 3,
+      },
+      {
+        label: 'Sensor 3',
+        data: [8, 11, 3, 5, 7, 12],
+        cubicInterpolationMode: 'monotone',
+        borderColor: 'blue',
+        borderWidth: 3,
+      },
+      {
+        label: 'Sensor 4',
+        data: [17, 2, 19, 8, 1, 9],
+        borderColor: 'orange',
+        cubicInterpolationMode: 'monotone',
+        borderWidth: 3,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
     </script>
 </body>
 </html>
