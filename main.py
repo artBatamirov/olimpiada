@@ -2,7 +2,20 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/air/', methods=['GET', 'POST'])
 def index():
-    return render_template('a_sensors.html', do=[[1, 1, 1, 5, 2, 1], [], [], [], []], da=[[10, 27], [15, 12], [14, 25], [18, 19]])
+    return render_template('a_sensors.html', widows_state=True, humidity_state=True,
+                           do=[[1, 1, 1, 25, 14, 17], [], [], [], []], da=[[10, 27], [15, 12], [14, 25], [18, 19]])
+
+
+
+@app.route('/soil/', methods=['GET', 'POST'])
+def index1():
+    return render_template('s_sensors.html', s_humidity_state=[False, True, False, False, False, True],
+                           do=[[1, 1, 1, 25, 14, 17], [], [], [], []], da=[[10, 27], [15, 12], [14, 25], [18, 19]])
+
+
+@app.route('/settings/', methods=['GET', 'POST'])
+def index2():
+    return render_template('settings.html', t_value='15', h_value='12%', hb_value='20%')
 

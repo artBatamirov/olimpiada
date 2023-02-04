@@ -34,13 +34,18 @@ font-weight: 600;
 
 .btn {
     height: 40px;
-    width: 100px;
+    width: 90px;
+    border-color: white;
     border-radius: 10px;
-    background-color: lightgrey;
+    background-color: lightblue;
 }
 
 button:active {
     background-color: lightblue;
 
+}
+
+ul {
+list-style-type: none;
 }
 

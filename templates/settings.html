@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <link href="/static/bar_style.css" rel="stylesheet">
+    <link href="/static/page_style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="container">
+        <a href="#" class="navbar-brand">Funtago</a>
+        <ul class="navbar-menu">
+            <li><a href="a_sensors.html">Air Sensors</a></li>
+            <li><a href="">Soil Sensors</a></li>
+            <li><a href="#">Statistics</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+        <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
+
+        <script>
+        function refreshPage(){
+            window.location.reload();
+        }
+        </script>
+    </div>
+    </nav>
+
+
+    <form>
+        <ul>
+        <li>T:</li><input value={{t_value}}></input></li>
+        </li>H:<input value={{h_value}}></input></li>
+        </li>Hb:<input value={{hb_value}}></input></li>
+        </ul>
+        <button type="submit" class="btn">Отправить</button>
+    </form>
+
+</body>
+</html>

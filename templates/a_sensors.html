@@ -28,21 +28,17 @@
             </script>
         </div>
     </nav>
+    <form>
+        <table align="center">
+            <tr><th>Snr</th><th>Температура воздуха</th><th>Влажность воздуха</th><th>Управление</th></tr>
+            <tr><th>№1</th><td>{{ da[0][0] }}</td><td>{{ da[0][1] }}</td><td><button action="" class="btn">{% if windows_state %}Закрыть форточки{% else %}Открыть форточки{% endif %}</button></td></tr>
+            <tr><th>№2</th><td>{{ da[1][0] }}</td><td>{{ da[1][1] }}</td><td><button action="" class="btn">{% if humidity_state %}Выключить увлажнение{% else %}Включить{% endif %}</button></td></tr>
+            <tr><th>№3</th><td>{{ da[2][0] }}</td><td>{{ da[2][1] }}</td></tr>
 
-    <table align="center">
-        <tr><th>Snr</th><th>Температура воздуха</th><th>Влажность воздуха</th></tr>
-        <tr><th>№1</th><td>{{ da[0][0] }}</td><td>{{ da[0][1] }}</td></tr>
-        <tr><th>№2</th><td>{{ da[1][0] }}</td><td>{{ da[1][1] }}</td></tr>
-        <tr><th>№3</th><td>{{ da[2][0] }}</td><td>{{ da[2][1] }}</td></tr>
-        <tr><th>№4</th><td>{{ da[3][0] }}</td><td>{{ da[3][1] }}</td></tr>
-    </table>
-    <form action>
-         <ol>
-            <li><input type="checkbox" name="wind" value="window">Форточки</li>
-            <li><input type="checkbox" name="wind" value="bluse">Увлажнение</li>
-        </ol>
-        <input type="submit">
+            <tr><th>№4</th><td>{{ da[3][0] }}</td><td>{{ da[3][1] }}</td></tr>
+        </table>
     </form>
+
 
 
     <hr>
