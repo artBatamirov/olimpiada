@@ -1,6 +1,6 @@
 import sqlalchemy
 
-from db_session import SqlAlchemyBase
+from data.db_session import SqlAlchemyBase
 
 
 class Temp_hum_sens(SqlAlchemyBase):

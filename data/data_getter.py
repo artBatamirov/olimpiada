@@ -1,6 +1,6 @@
 import requests
 import datetime as dt
-from tables import *
+from data.tables import *
 
 def temperature_and_humidity_sensors():
     sensors = []

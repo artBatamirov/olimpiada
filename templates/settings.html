@@ -11,10 +11,10 @@
     <div class="container">
         <a href="#" class="navbar-brand">Funtago</a>
         <ul class="navbar-menu">
-            <li><a href="a_sensors.html">Air Sensors</a></li>
-            <li><a href="">Soil Sensors</a></li>
+            <li><a href="http://127.0.0.1:5000/air/">Air Sensors</a></li>
+            <li><a href="http://127.0.0.1:5000/soil/">Soil Sensors</a></li>
             <li><a href="#">Statistics</a></li>
-            <li><a href="#">Settings</a></li>
+            <li><a href="">Settings</a></li>
         </ul>
         <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
 
@@ -29,9 +29,9 @@
 
     <form>
         <ul>
-        <li>T:</li><input value={{t_value}}></input></li>
-        </li>H:<input value={{h_value}}></input></li>
-        </li>Hb:<input value={{hb_value}}></input></li>
+            <li>T:</li><input value={{ t_value }}></li>
+            <li>H:<input value={{ h_value }}></li>
+            <li>Hb:<input value={{ hb_value }}></li>
         </ul>
         <button type="submit" class="btn">Отправить</button>
     </form>

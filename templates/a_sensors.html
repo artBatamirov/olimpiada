@@ -15,9 +15,9 @@
             <a href="#" class="navbar-brand">Funtago</a>
             <ul class="navbar-menu" >
                 <li><a href="">Air Sensors</a></li>
-                <li><a href="s_sensors.html">Soil Sensors</a></li>
+                <li><a href="http://127.0.0.1:5000/soil/">Soil Sensors</a></li>
                 <li><a href="#">Statistics</a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="http://127.0.0.1:5000/settings/">Settings</a></li>
             </ul>
             <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
 
@@ -31,11 +31,15 @@
     <form>
         <table align="center">
             <tr><th>Snr</th><th>Температура воздуха</th><th>Влажность воздуха</th><th>Управление</th></tr>
-            <tr><th>№1</th><td>{{ da[0][0] }}</td><td>{{ da[0][1] }}</td><td><button action="" class="btn">{% if windows_state %}Закрыть форточки{% else %}Открыть форточки{% endif %}</button></td></tr>
-            <tr><th>№2</th><td>{{ da[1][0] }}</td><td>{{ da[1][1] }}</td><td><button action="" class="btn">{% if humidity_state %}Выключить увлажнение{% else %}Включить{% endif %}</button></td></tr>
-            <tr><th>№3</th><td>{{ da[2][0] }}</td><td>{{ da[2][1] }}</td></tr>
+            <tr><th>№1</th><td>{{ do[0] }}</td><td>{{ do[0] }}</td><td>
+                <button action="" class="btn">
+                    {% if windows_state %}Закрыть форточки{% else %}Открыть форточки{% endif %}</button></td></tr>
+            <tr><th>№2</th><td>{{ do[1] }}</td><td>{{ do[1] }}</td><td>
+                <button action="" class="btn">
+                    {% if humidity_state %}Выключить увлажнение{% else %}Включить{% endif %}</button></td></tr>
+            <tr><th>№3</th><td>{{ do[2] }}</td><td>{{ do[2]}}</td></tr>
 
-            <tr><th>№4</th><td>{{ da[3][0] }}</td><td>{{ da[3][1] }}</td></tr>
+            <tr><th>№4</th><td>{{ do[3] }}</td><td>{{ do[3] }}</td></tr>
         </table>
     </form>
 
@@ -65,21 +69,21 @@
       },
       {
         label: 'Sensor 2',
-        data: [17, 10, 3, 18, 2, 5],
+        data: {{ do[1] }},
         borderColor: 'red',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       },
       {
         label: 'Sensor 3',
-        data: [8, 11, 3, 5, 7, 12],
+        data: {{ do[2] }},
         cubicInterpolationMode: 'monotone',
         borderColor: 'blue',
         borderWidth: 3,
       },
       {
         label: 'Sensor 4',
-        data: [17, 2, 19, 8, 1, 9],
+        data: {{ do[3] }},
         borderColor: 'orange',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,

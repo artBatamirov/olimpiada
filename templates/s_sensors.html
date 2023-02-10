@@ -14,10 +14,10 @@
         <div class="container">
             <a href="#" class="navbar-brand">Funtago</a>
             <ul class="navbar-menu">
-                <li><a href="a_sensors.html">Air Sensors</a></li>
+                <li><a href="http://127.0.0.1:5000/air/">Air Sensors</a></li>
                 <li><a href="">Soil Sensors</a></li>
                 <li><a href="#">Statistics</a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="http://127.0.0.1:5000/settings/">Settings</a></li>
             </ul>
             <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
 
@@ -31,12 +31,12 @@
 
     <table align="center">
         <tr><th>Snr</th><th>Влажность почвы</th><th>Полив</th></tr>
-        <tr><th>№1</th><td>данные</td><td><button class="btn">{% if s_humidity_state[0] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№2</th><td>данные</td><td><button class="btn">{% if s_humidity_state[1] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№3</th><td>данные</td><td><button class="btn">{% if s_humidity_state[2] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№4</th><td>данные</td><td><button class="btn">{% if s_humidity_state[3] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№5</th><td>данные</td><td><button class="btn">{% if s_humidity_state[4] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№6</th><td>данные</td><td><button class="btn">{% if s_humidity_state[5] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№1</th><td>{{do[0]}}</td><td><button class="btn">{% if s_humidity_state[0] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№2</th><td>{{do[1]}}</td><td><button class="btn">{% if s_humidity_state[1] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№3</th><td>{{do[2]}}</td><td><button class="btn">{% if s_humidity_state[2] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№4</th><td>{{do[3]}}</td><td><button class="btn">{% if s_humidity_state[3] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№5</th><td>{{do[4]}}</td><td><button class="btn">{% if s_humidity_state[4] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№6</th><td>{{do[5]}}</td><td><button class="btn">{% if s_humidity_state[5] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
     </table>
 
     <hr>
