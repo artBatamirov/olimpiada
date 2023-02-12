@@ -27,13 +27,13 @@
     </nav>
 
 
-    <form>
+    <form action="" method="POST">
         <ul>
-            <li>T:</li><input value={{ t_value }}></li>
-            <li>H:<input value={{ h_value }}></li>
-            <li>Hb:<input value={{ hb_value }}></li>
+            <li>T:</li><input name="t_value" type="number" value={{ t_value }}></li>
+            <li>H:<input name="h_value" type="number" value={{ h_value }}></li>
+            <li>Hb:<input name="hb_value" type="number" value={{ hb_value }}></li>
         </ul>
-        <button type="submit" class="btn">Отправить</button>
+        <input type="submit" class="btn" value="Отправить">
     </form>
 
 </body>

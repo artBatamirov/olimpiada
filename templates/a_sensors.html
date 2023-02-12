@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Air</title>
+    <title>{{windows_state}}</title>
     <link href="/static/bar_style.css" rel="stylesheet">
     <link href="/static/page_style.css" rel="stylesheet">
 
@@ -28,15 +28,21 @@
             </script>
         </div>
     </nav>
-    <form>
+
+
+    <form action="" method="POST">
         <table align="center">
             <tr><th>Snr</th><th>Температура воздуха</th><th>Влажность воздуха</th><th>Управление</th></tr>
             <tr><th>№1</th><td>{{ do[0] }}</td><td>{{ do[0] }}</td><td>
-                <button action="" class="btn">
-                    {% if windows_state %}Закрыть форточки{% else %}Открыть форточки{% endif %}</button></td></tr>
+                <button action="" class="btn" type="submit" name="win" value="{{ windows_state }}">
+                    {% if windows_state == '1' %}Закрыть форточки{% else %}Открыть форточки{% endif %}
+                </button></td></tr>
+
             <tr><th>№2</th><td>{{ do[1] }}</td><td>{{ do[1] }}</td><td>
-                <button action="" class="btn">
-                    {% if humidity_state %}Выключить увлажнение{% else %}Включить{% endif %}</button></td></tr>
+                <button action="" class="btn" type="submit" name="hum" value="{{ humidity_state }}">
+                    {% if humidity_state == '1' %}Выключить увлажнение{% else %}Включить увлажнение{% endif %}
+                </button></td></tr>
+
             <tr><th>№3</th><td>{{ do[2] }}</td><td>{{ do[2]}}</td></tr>
 
             <tr><th>№4</th><td>{{ do[3] }}</td><td>{{ do[3] }}</td></tr>

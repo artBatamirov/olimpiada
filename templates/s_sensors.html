@@ -29,16 +29,17 @@
         </div>
     </nav>
 
+    <form action="" method="POST">
     <table align="center">
         <tr><th>Snr</th><th>Влажность почвы</th><th>Полив</th></tr>
-        <tr><th>№1</th><td>{{do[0]}}</td><td><button class="btn">{% if s_humidity_state[0] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№2</th><td>{{do[1]}}</td><td><button class="btn">{% if s_humidity_state[1] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№3</th><td>{{do[2]}}</td><td><button class="btn">{% if s_humidity_state[2] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№4</th><td>{{do[3]}}</td><td><button class="btn">{% if s_humidity_state[3] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№5</th><td>{{do[4]}}</td><td><button class="btn">{% if s_humidity_state[4] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№6</th><td>{{do[5]}}</td><td><button class="btn">{% if s_humidity_state[5] %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№1</th><td>{{do[0]}}</td><td><button class="btn" type="submit" name="s1" value="{{s1}}">{% if s1 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№2</th><td>{{do[1]}}</td><td><button class="btn" type="submit" name="s2" value="{{s2}}">{% if s2 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№3</th><td>{{do[2]}}</td><td><button class="btn" type="submit" name="s3" value="{{s3}}">{% if s3 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№4</th><td>{{do[3]}}</td><td><button class="btn" type="submit" name="s4" value="{{s4}}">{% if s4 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№5</th><td>{{do[4]}}</td><td><button class="btn" type="submit" name="s5" value="{{s5}}">{% if s5 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№6</th><td>{{do[5]}}</td><td><button class="btn" type="submit" name="s6" value="{{s6}}">{% if s6 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
     </table>
-
+    </form>
     <hr>
     <h1 align="center">Влажность почвы</h1>
     <div>
