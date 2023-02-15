@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+    <link href="/static/bar_style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-brand">Funtago</a>
+            <ul class="navbar-menu" >
+                <li><a href="http://127.0.0.1:5000/air/">Air Sensors</a></li>
+                <li><a href="http://127.0.0.1:5000/soil/">Soil Sensors</a></li>
+                <li><a href="">Statistics</a></li>
+                <li><a href="http://127.0.0.1:5000/settings/">Settings</a></li>
+
+            </ul>
+            <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
+
+            <script>
+            function refreshPage(){
+                window.location.reload();
+            }
+            </script>
+        </div>
+    </nav>
+
+
+    <h1 align="center">Статистика показаний датчиков</h1>
+    <div>
+        <canvas id="Chart1" height="70px"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+    const ctx4 = document.getElementById('Chart1').getContext("2d");
+
+  new Chart(ctx4, {
+    type: 'line',
+    data: {
+      labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      datasets: [{
+        label: 'Air temperature',
+        data: {{st_air_temp | tojson }},
+        borderColor: 'green',
+        cubicInterpolationMode: 'monotone',
+        borderWidth: 3,
+      },
+      {
+        label: 'Air humidity',
+        data: {{st_air_hum | tojson }},
+        borderColor: 'red',
+        cubicInterpolationMode: 'monotone',
+        borderWidth: 3,
+      },
+      {
+        label: 'Soil humidity',
+        data: {{st_soil_hum | tojson }},
+        borderColor: 'orange',
+        cubicInterpolationMode: 'monotone',
+        borderWidth: 3,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+    </script>
+
+
+</body>
+</html>

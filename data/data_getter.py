@@ -18,7 +18,7 @@ def temperature_and_humidity_sensors():
     return sensors
 
 
-def air_temperature():
+def hum_sensors():
     sensors = []
     cur_time = dt.datetime.now()
     for i in range(1, 7):

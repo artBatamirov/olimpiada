@@ -16,7 +16,7 @@
             <ul class="navbar-menu">
                 <li><a href="http://127.0.0.1:5000/air/">Air Sensors</a></li>
                 <li><a href="">Soil Sensors</a></li>
-                <li><a href="#">Statistics</a></li>
+                <li><a href="http://127.0.0.1:5000/statistics/">Statistics</a></li>
                 <li><a href="http://127.0.0.1:5000/settings/">Settings</a></li>
             </ul>
             <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
@@ -28,22 +28,28 @@
             </script>
         </div>
     </nav>
-
+    <h2></h2>
     <form action="" method="POST">
     <table align="center">
         <tr><th>Snr</th><th>Влажность почвы</th><th>Полив</th></tr>
-        <tr><th>№1</th><td>{{do[0]}}</td><td><button class="btn" type="submit" name="s1" value="{{s1}}">{% if s1 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№2</th><td>{{do[1]}}</td><td><button class="btn" type="submit" name="s2" value="{{s2}}">{% if s2 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№3</th><td>{{do[2]}}</td><td><button class="btn" type="submit" name="s3" value="{{s3}}">{% if s3 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№4</th><td>{{do[3]}}</td><td><button class="btn" type="submit" name="s4" value="{{s4}}">{% if s4 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№5</th><td>{{do[4]}}</td><td><button class="btn" type="submit" name="s5" value="{{s5}}">{% if s5 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№6</th><td>{{do[5]}}</td><td><button class="btn" type="submit" name="s6" value="{{s6}}">{% if s6 == '1' %}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[5].device_id}}</th><td>{{hum_sns[5].hum}}</td><td><button class="btn" type="submit"
+                name="water1" value="{{water_bed1}}" {% if  (hum1  | sum) / 10 >= hb_value.value and water_state[5] == false%}disabled{%endif%}> {% if water_states[0]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[4].device_id}}</th><td>{{hum_sns[4].hum}}</td><td><button class="btn" type="submit"
+                name="water2" value="{{water_bed2}}" {% if  (hum2  | sum) / 10 >= hb_value.value and water_state[4] == false%}disabled{%endif%}>{% if water_states[1]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[3].device_id}}</th><td>{{hum_sns[3].hum}}</td><td><button class="btn" type="submit"
+                name="water3" value="{{water_bed3}}" {% if  (hum3  | sum) / 10 >= hb_value.value and water_state[3]== false%}disabled{%endif%}>{% if water_states[2]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[2].device_id}}</th><td>{{hum_sns[2].hum}}</td><td><button class="btn" type="submit"
+                name="water4" value="{{water_bed4}}" {% if  (hum4  | sum) / 10 >= hb_value.value and water_state[2] == false%}disabled{%endif%}>{% if water_states[3]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[1].device_id}}</th><td>{{hum_sns[1].hum}}</td><td><button class="btn" type="submit"
+                name="water5" value="{{water_bed5}}" {% if  (hum5  | sum) / 10 >= hb_value.value and water_state[1] == false%}disabled{%endif%}>{% if water_states[4]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[0].device_id}}</th><td>{{hum_sns[0].hum}}</td><td><button class="btn" type="submit"
+                name="water6" value="{{water_bed6}}" {% if  (hum6  | sum) / 10 >= hb_value.value and water_state[0] == false%}disabled{%endif%}>{% if water_states[5]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
     </table>
     </form>
     <hr>
     <h1 align="center">Влажность почвы</h1>
     <div>
-        <canvas id="thirdChart" height="40px"></canvas>
+        <canvas id="thirdChart" height="80px"></canvas>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -55,45 +61,45 @@ const ctx3 = document.getElementById('thirdChart').getContext("2d");
   new Chart(ctx3, {
     type: 'line',
     data: {
-      labels: ['start', '0:30', '1:00', '1:30', '2:00', '2:30'],
+      labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       datasets: [{
-        label: 'Sensor 1',
-        data: [12, 19, 3, 5, 2, 21],
+        label: 'Sensor {{ hum_sns[5].device_id}}',
+        data: {{ hum1 | tojson}},
         borderColor: 'brown',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 2',
-        data: [17, 10, 3, 18, 2, 5],
+        label: 'Sensor {{ hum_sns[4].device_id}}',
+        data: {{ hum2 | tojson}},
         borderColor: 'MediumSlateBlue',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 3',
-        data: [8, 11, 3, 5, 7, 12],
+        label: 'Sensor {{ hum_sns[3].device_id}}',
+        data: {{ hum3 | tojson}},
         cubicInterpolationMode: 'monotone',
         borderColor: 'Aquamarine',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 4',
-        data: [17, 2, 19, 8, 1, 9],
+        label: 'Sensor {{ hum_sns[2].device_id}}',
+        data: {{ hum4 | tojson}},
         borderColor: 'Orchid',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 5',
-        data: [17, 2, 19, 8, 1, 9],
+        label: 'Sensor {{ hum_sns[1].device_id}}',
+        data: {{ hum5 | tojson}},
         borderColor: 'DeepPink',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 6',
-        data: [17, 2, 19, 8, 1, 9],
+        label: 'Sensor {{ hum_sns[0].device_id}}',
+        data: {{ hum6 | tojson}},
         borderColor: 'LightGreen',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,

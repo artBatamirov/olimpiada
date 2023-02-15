@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{windows_state}}</title>
+    <title>Air</title>
     <link href="/static/bar_style.css" rel="stylesheet">
     <link href="/static/page_style.css" rel="stylesheet">
 
@@ -16,7 +16,7 @@
             <ul class="navbar-menu" >
                 <li><a href="">Air Sensors</a></li>
                 <li><a href="http://127.0.0.1:5000/soil/">Soil Sensors</a></li>
-                <li><a href="#">Statistics</a></li>
+                <li><a href="http://127.0.0.1:5000/statistics/">Statistics</a></li>
                 <li><a href="http://127.0.0.1:5000/settings/">Settings</a></li>
             </ul>
             <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
@@ -33,19 +33,20 @@
     <form action="" method="POST">
         <table align="center">
             <tr><th>Snr</th><th>Температура воздуха</th><th>Влажность воздуха</th><th>Управление</th></tr>
-            <tr><th>№1</th><td>{{ do[0] }}</td><td>{{ do[0] }}</td><td>
-                <button action="" class="btn" type="submit" name="win" value="{{ windows_state }}">
-                    {% if windows_state == '1' %}Закрыть форточки{% else %}Открыть форточки{% endif %}
-                </button></td></tr>
 
-            <tr><th>№2</th><td>{{ do[1] }}</td><td>{{ do[1] }}</td><td>
-                <button action="" class="btn" type="submit" name="hum" value="{{ humidity_state }}">
-                    {% if humidity_state == '1' %}Выключить увлажнение{% else %}Включить увлажнение{% endif %}
-                </button></td></tr>
+            <tr><th>№{{ th_sns[3].device_id}}</th><td>{{ th_sns[3].temp }}</td><td>{{ th_sns[3].hum }}</td><td>
+                <button  action="" method="POST" class="btn" type="submit" name="win"  value="{{windows_state}}" {% if st_air_temp <= t_value.value and windows_state == false %}disabled="true"{%endif%}>
+                 {% if windows_state %}Закрыть форточки{% else %}Открыть форточки{% endif %}</button></td></tr>
 
-            <tr><th>№3</th><td>{{ do[2] }}</td><td>{{ do[2]}}</td></tr>
+            <tr><th>№{{ th_sns[2].device_id}}</th><td>{{ th_sns[2].temp }}</td><td>{{ th_sns[2].hum }}</td><td>
+                <button  action="" method="POST" class="btn" type="submit" name="hum" value="{{humidity_state}}" {% if st_air_hum >= h_value.value and humidity_state == false %}disabled{%endif%}>
+                {% if humidity_state %}Выключить увлажнение{% else %}Включить увлажнение{% endif %}</button></td></tr>
 
-            <tr><th>№4</th><td>{{ do[3] }}</td><td>{{ do[3] }}</td></tr>
+            <tr><th>№{{ th_sns[1].device_id}}</th><td>{{ th_sns[1].temp }}</td><td>{{ th_sns[1].hum}}</td></tr>
+
+            <tr><th>№{{ th_sns[0].device_id}}</th><td>{{ th_sns[0].temp }}</td><td>{{ th_sns[0].hum }}</td></tr>
+
+            <tr><th>Среднее</th><td>{{ st_air_temp | round(2) }}</td><td>{{ st_air_hum | round(2) }}</td></tr>
         </table>
     </form>
 
@@ -54,7 +55,7 @@
     <hr>
     <h1 align="center">Температура воздуха</h1>
     <div>
-        <canvas id="firstChart" height="40px"></canvas>
+        <canvas id="firstChart" height=40px"></canvas>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -65,31 +66,31 @@
   new Chart(ctx1, {
     type: 'line',
     data: {
-      labels: ['start', '0:30', '1:00', '1:30', '2:00', '2:30'],
+      labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       datasets: [{
-        label: 'Sensor 1',
-        data: {{ do[0] }},
+        label: 'Sensor {{ th_sns[3].device_id}}',
+        data: {{ temp1 | tojson}},
         borderColor: 'green',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 2',
-        data: {{ do[1] }},
+        label: 'Sensor {{ th_sns[2].device_id}}',
+        data: {{ temp2 | tojson}},
         borderColor: 'red',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 3',
-        data: {{ do[2] }},
+        label: 'Sensor {{ th_sns[1].device_id}}',
+        data: {{ temp3 | tojson}},
         cubicInterpolationMode: 'monotone',
         borderColor: 'blue',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 4',
-        data: {{ do[3] }},
+        label: 'Sensor {{ th_sns[0].device_id}}',
+        data: {{ temp4 | tojson}},
         borderColor: 'orange',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
@@ -113,36 +114,36 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-    const ctx3 = document.getElementById('secondChart').getContext("2d");
+    const ctx2 = document.getElementById('secondChart').getContext("2d");
 
-  new Chart(ctx3, {
+  new Chart(ctx2, {
     type: 'line',
     data: {
-      labels: ['start', '0:30', '1:00', '1:30', '2:00', '2:30'],
+      labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       datasets: [{
-        label: 'Sensor 1',
-        data: [12, 19, 3, 5, 2, 21],
+        label: 'Sensor {{ th_sns[3].device_id}}',
+        data: {{ hum1 | tojson}},
         borderColor: 'green',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 2',
-        data: [17, 10, 3, 18, 2, 5],
+        label: 'Sensor {{ th_sns[2].device_id}}',
+        data: {{ hum2 | tojson}},
         borderColor: 'red',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 3',
-        data: [8, 11, 3, 5, 7, 12],
+        label: 'Sensor {{ th_sns[1].device_id}}',
+        data: {{ hum3 | tojson}},
         cubicInterpolationMode: 'monotone',
         borderColor: 'blue',
         borderWidth: 3,
       },
       {
-        label: 'Sensor 4',
-        data: [17, 2, 19, 8, 1, 9],
+        label: 'Sensor {{ th_sns[0].device_id}}',
+        data: {{ hum4 | tojson}},
         borderColor: 'orange',
         cubicInterpolationMode: 'monotone',
         borderWidth: 3,
