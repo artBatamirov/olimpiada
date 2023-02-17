@@ -59,6 +59,12 @@
     border-style: solid;
     border-width: 2px;
     border-radius: 10px;
+}
 
-
+.extreme {
+    color: black;
+    border-color: #FF0000;
+    border-width: 2px;
+    border-radius: 10px;
+    margin-left: 10px;
 }

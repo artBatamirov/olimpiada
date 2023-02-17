@@ -21,6 +21,8 @@
             </ul>
             <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
 
+            <form action="" method="POST">
+            <button class="extreme" type="submit" name="emergency" value="{{ emergency }}">{% if emergency %}Выключить{% else %}Включить{% endif %} экстренный режим</button>
             <script>
             function refreshPage(){
                 window.location.reload();
@@ -29,21 +31,21 @@
         </div>
     </nav>
     <h2></h2>
-    <form action="" method="POST">
+
     <table align="center">
-        <tr><th>Snr</th><th>Влажность почвы</th><th>Полив</th></tr>
-        <tr><th>№{{ hum_sns[5].device_id}}</th><td>{{hum_sns[5].hum}}</td><td><button class="btn" type="submit"
-                name="water1" value="{{water_bed1}}" {% if  (hum1  | sum) / 10 >= hb_value.value and water_state[5] == false%}disabled{%endif%}> {% if water_states[0]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№{{ hum_sns[4].device_id}}</th><td>{{hum_sns[4].hum}}</td><td><button class="btn" type="submit"
-                name="water2" value="{{water_bed2}}" {% if  (hum2  | sum) / 10 >= hb_value.value and water_state[4] == false%}disabled{%endif%}>{% if water_states[1]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№{{ hum_sns[3].device_id}}</th><td>{{hum_sns[3].hum}}</td><td><button class="btn" type="submit"
-                name="water3" value="{{water_bed3}}" {% if  (hum3  | sum) / 10 >= hb_value.value and water_state[3]== false%}disabled{%endif%}>{% if water_states[2]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№{{ hum_sns[2].device_id}}</th><td>{{hum_sns[2].hum}}</td><td><button class="btn" type="submit"
-                name="water4" value="{{water_bed4}}" {% if  (hum4  | sum) / 10 >= hb_value.value and water_state[2] == false%}disabled{%endif%}>{% if water_states[3]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№{{ hum_sns[1].device_id}}</th><td>{{hum_sns[1].hum}}</td><td><button class="btn" type="submit"
-                name="water5" value="{{water_bed5}}" {% if  (hum5  | sum) / 10 >= hb_value.value and water_state[1] == false%}disabled{%endif%}>{% if water_states[4]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
-        <tr><th>№{{ hum_sns[0].device_id}}</th><td>{{hum_sns[0].hum}}</td><td><button class="btn" type="submit"
-                name="water6" value="{{water_bed6}}" {% if  (hum6  | sum) / 10 >= hb_value.value and water_state[0] == false%}disabled{%endif%}>{% if water_states[5]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>Snr</th><th>Влажность почвы</th><th>Среднее</th><th>Полив</th></tr>
+        <tr><th>№{{ hum_sns[5].device_id}}</th><td>{{hum_sns[5].hum}}</td><td>{{ ((hum1 | sum) / 10) | round(2)}}</td><td><button class="btn" type="submit"
+                name="water1" value="{{water_bed1}}" {% if  (hum1 | sum) / 10 >= hb_value.value and water_states[5] == false and not emergency%}disabled{%endif%}> {% if water_states[0]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[4].device_id}}</th><td>{{hum_sns[4].hum}}</td><td>{{ ((hum2 | sum) / 10) | round(2)}}</td><td><button class="btn" type="submit"
+                name="water2" value="{{water_bed2}}" {% if  (hum2 | sum) / 10 >= hb_value.value and water_states[4] == false and not emergency%}disabled{%endif%}>{% if water_states[1]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[3].device_id}}</th><td>{{hum_sns[3].hum}}</td><td>{{ ((hum3 | sum) / 10) | round(2)}}</td><td><button class="btn" type="submit"
+                name="water3" value="{{water_bed3}}" {% if  (hum3 | sum) / 10 >= hb_value.value and water_states[3]== false and not emergency%}disabled{%endif%}>{% if water_states[2]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[2].device_id}}</th><td>{{hum_sns[2].hum}}</td><td>{{ ((hum4 | sum) / 10) | round(2)}}</td><td><button class="btn" type="submit"
+                name="water4" value="{{water_bed4}}" {% if  (hum4 | sum) / 10 >= hb_value.value and water_states[2] == false and not emergency%}disabled{%endif%}>{% if water_states[3]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[1].device_id}}</th><td>{{hum_sns[1].hum}}</td><td>{{ ((hum5 | sum) / 10) | round(2)}}</td><td><button class="btn" type="submit"
+                name="water5" value="{{water_bed5}}" {% if  (hum5 | sum) / 10 >= hb_value.value and water_states[1] == false and not emergency%}disabled{%endif%}>{% if water_states[4]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
+        <tr><th>№{{ hum_sns[0].device_id}}</th><td>{{hum_sns[0].hum}}</td><td>{{ ((hum6 | sum) / 10) | round(2)}}</td><td><button class="btn" type="submit"
+                name="water6" value="{{water_bed6}}" {% if  (hum6 | sum) / 10 >= hb_value.value and water_states[0] == false and not emergency%}disabled{%endif%}>{% if water_states[5]%}Выключить{% else %}Включить{% endif %}</button></td></tr>
     </table>
     </form>
     <hr>

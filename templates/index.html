@@ -18,6 +18,9 @@
             </ul>
             <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
 
+            <form>
+            <button class="extreme" type="submit" name="emergency" value="{{ emergency }}">{% if emergency %}Выключить{% else %}Включить{% endif %} экстренный режим</button>
+            </form>
             <script>
             function refreshPage(){
                 window.location.reload();

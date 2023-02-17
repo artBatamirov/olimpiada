@@ -20,7 +20,8 @@
                 <li><a href="http://127.0.0.1:5000/settings/">Settings</a></li>
             </ul>
             <button class="fresh" type="button" onClick="refreshPage()">Reset</button>
-
+            <form action="" method="POST">
+            <button class="extreme" type="submit" name="emergency" value="{{ emergency }}">{% if emergency %}Выключить{% else %}Включить{% endif %} экстренный режим</button>
             <script>
             function refreshPage(){
                 window.location.reload();
@@ -30,16 +31,16 @@
     </nav>
 
 
-    <form action="" method="POST">
+
         <table align="center">
             <tr><th>Snr</th><th>Температура воздуха</th><th>Влажность воздуха</th><th>Управление</th></tr>
 
             <tr><th>№{{ th_sns[3].device_id}}</th><td>{{ th_sns[3].temp }}</td><td>{{ th_sns[3].hum }}</td><td>
-                <button  action="" method="POST" class="btn" type="submit" name="win"  value="{{windows_state}}" {% if st_air_temp <= t_value.value and windows_state == false %}disabled="true"{%endif%}>
+                <button  action="" method="POST" class="btn" type="submit" name="win"  value="{{windows_state}}" {% if st_air_temp <= t_value.value and windows_state == false and not emergency %}disabled="true"{%endif%}>
                  {% if windows_state %}Закрыть форточки{% else %}Открыть форточки{% endif %}</button></td></tr>
 
             <tr><th>№{{ th_sns[2].device_id}}</th><td>{{ th_sns[2].temp }}</td><td>{{ th_sns[2].hum }}</td><td>
-                <button  action="" method="POST" class="btn" type="submit" name="hum" value="{{humidity_state}}" {% if st_air_hum >= h_value.value and humidity_state == false %}disabled{%endif%}>
+                <button  action="" method="POST" class="btn" type="submit" name="hum" value="{{humidity_state}}" {% if st_air_hum >= h_value.value and humidity_state == false and not emergency%}disabled{%endif%}>
                 {% if humidity_state %}Выключить увлажнение{% else %}Включить увлажнение{% endif %}</button></td></tr>
 
             <tr><th>№{{ th_sns[1].device_id}}</th><td>{{ th_sns[1].temp }}</td><td>{{ th_sns[1].hum}}</td></tr>

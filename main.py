@@ -10,6 +10,9 @@ db_session.global_init("data/base.sqlite")
 
 session = db_session.create_session()
 
+emergency_state = session.query(Statuses).filter(Statuses.id == 3).first()
+emergency = emergency_state.status
+
 
 def ask_sensors():
     air_sensors = temperature_and_humidity_sensors()
@@ -26,13 +29,20 @@ sched.add_job(ask_sensors, 'interval', seconds=10)
 sched.start()
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def menu_page():
+    global emergency
+    global emergency_state
+    if request.method == 'POST':
+        emergency = not emergency
+        emergency_state.status = emergency
     return render_template('index.html')
 
 
 @app.route('/air/', methods=['GET', 'POST'])
 def air_page():
+    global emergency
+    global emergency_state
     t_value = session.query(Setttings).filter(Setttings.id == 1).first()
     h_value = session.query(Setttings).filter(Setttings.id == 2).first()
 
@@ -40,6 +50,7 @@ def air_page():
     windows_state = win_state.status
     hum_state = session.query(Statuses).filter(Statuses.id == 2).first()
     humidity_state = hum_state.status
+
 
     air_sensors = session.query(Temp_hum_sens).order_by(Temp_hum_sens.id.desc()).limit(40)
 
@@ -54,6 +65,9 @@ def air_page():
             humidity_state = not humidity_state
             control_of_the_humidification_system(1 if humidity_state else 0)
             hum_state.status = humidity_state
+        if request.form.get('emergency') is not None:
+            emergency = not emergency
+            emergency_state.status = emergency
         session.commit()
 
     return render_template('a_sensors.html', windows_state=windows_state, humidity_state=humidity_state,
@@ -66,11 +80,13 @@ def air_page():
                            hum3=list(map(lambda x: x.hum, air_sensors))[1::4],
                            hum4=list(map(lambda x: x.hum, air_sensors))[0::4],
                            st_air_temp=st_air_temp, st_air_hum=st_air_hum,
-                           t_value=t_value, h_value=h_value)
+                           t_value=t_value, h_value=h_value, emergency=emergency)
 
 
 @app.route('/soil/', methods=['GET', 'POST'])
 def soil_page():
+    global emergency
+    global emergency_state
     hb_value = session.query(Setttings).filter(Setttings.id == 3).first()
     water_states = []
     bd_water_states = []
@@ -81,6 +97,9 @@ def soil_page():
 
     soil_sensors = session.query(Hum_ground_sens).order_by(Hum_ground_sens.id.desc()).limit(60)
     if request.method == 'POST':
+        if request.form.get('emergency') is not None:
+            emergency = not emergency
+            emergency_state.status = emergency
         for i in range(6):
             if request.form.get(f'water{i + 1}') is not None:
                 water_states[i] = not water_states[i]
@@ -95,11 +114,15 @@ def soil_page():
                            hum3=list(map(lambda x: x.hum, soil_sensors))[3::6],
                            hum4=list(map(lambda x: x.hum, soil_sensors))[2::6],
                            hum5=list(map(lambda x: x.hum, soil_sensors))[1::6],
-                           hum6=list(map(lambda x: x.hum, soil_sensors))[0::6],)
+                           hum6=list(map(lambda x: x.hum, soil_sensors))[0::6],
+                           emergency=emergency)
 
 
-@app.route('/statistics/')
+@app.route('/statistics/', methods=['GET', 'POST'])
 def statistics_page():
+    global emergency
+    global emergency_state
+
     air_sensors = session.query(Temp_hum_sens).order_by(Temp_hum_sens.id.desc()).limit(40)
     soil_sensors = session.query(Hum_ground_sens).order_by(Hum_ground_sens.id.desc()).limit(60)
     temp1 = list(map(lambda x: x.temp, air_sensors))[3::4]
@@ -129,11 +152,19 @@ def statistics_page():
         a = (hum_soil1[i] + hum_soil2[i] + hum_soil3[i] + hum_soil4[i] + hum_soil5[i] + hum_soil6[i]) / 6
         st_soil_hum.append(a)
 
-    return render_template('statistics.html', st_air_temp=st_air_temp, st_air_hum=st_air_hum, st_soil_hum=st_soil_hum)
+    if request.method == 'POST':
+        emergency = not emergency
+        emergency_state.status = emergency
+
+    return render_template('statistics.html', st_air_temp=st_air_temp, st_air_hum=st_air_hum, st_soil_hum=st_soil_hum,
+                           emergency=emergency)
 
 
 @app.route('/settings/', methods=['GET', 'POST'])
 def settings_page():
+    global emergency
+    global emergency_state
+
     t_value = session.query(Setttings).filter(Setttings.id == 1).first()
     t_value_ask = t_value.value
     h_value = session.query(Setttings).filter(Setttings.id == 2).first()
@@ -142,6 +173,9 @@ def settings_page():
     hb_value_ask = hb_value.value
 
     if request.method == 'POST':
+        if request.form.get('emergency') is not None:
+            emergency = not emergency
+            emergency_state.status = emergency
         t_value_ask = request.form.get('t_value')
         t_value.value = t_value_ask
         h_value_ask = request.form.get('h_value')
@@ -150,7 +184,8 @@ def settings_page():
         hb_value.value = hb_value_ask
         session.commit()
 
-    return render_template('settings.html', t_value=t_value_ask, h_value=h_value_ask, hb_value=hb_value_ask)
+    return render_template('settings.html', t_value=t_value_ask, h_value=h_value_ask, hb_value=hb_value_ask,
+                           emergency=emergency)
 
 
 if __name__ == '__main__':

@@ -16,9 +16,14 @@ def main():
     hum_state.name = 'humidication'
     hum_state.status = False
     session.add(hum_state)
+    emergency_state = Statuses()
+    emergency_state.id = 3
+    emergency_state.name = 'emergency'
+    emergency_state.status = False
+    session.add(emergency_state)
     for i in range(1, 7):
         water_bed = Statuses()
-        water_bed.id = 2 + i
+        water_bed.id = 3 + i
         water_bed.name = f'water_bed{i}'
         water_bed.status = False
         session.add(water_bed)
