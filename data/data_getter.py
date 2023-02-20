@@ -47,7 +47,7 @@ def management_of_watering_beds(state, id):
     link = f'https://dt.miet.ru/ppo_it/api/watering?state={state}&id={id}'
     response = requests.patch(link)
     resp = response.json()
-    sens = Setttings()
+    sens = Statuses()
     sens.name = f'watering{id}'
     sens.state = state
     return sens
@@ -56,7 +56,7 @@ def control_of_the_humidification_system(state_value):
     link = f'https://dt.miet.ru/ppo_it/api/total_hum?state={state_value}'
     response = requests.patch(link)
     resp = response.json()
-    sens = Setttings()
+    sens = Statuses()
     sens.name = 'humidification'
     sens.state = state_value
     return sens
